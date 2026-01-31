@@ -11,7 +11,7 @@ void crossbar :: func()
 	packet v_cross4;
 	sc_uint<15>  v_config;
 
-	// functionality
+	// Functionality
 	while( true )
 	{ 
 		wait();

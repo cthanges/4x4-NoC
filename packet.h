@@ -4,10 +4,10 @@
 #include "systemc.h"
 struct packet {
        sc_uint<11> data;	
-       sc_uint<4> id;			// packet source ID
-       sc_uint<4> dest;			// packet destination ID
-	   sc_uint<1> pkt_clk;		// bit for changing the new packet condition
-	   sc_uint<1> h_t;			// header or tail flit("1" represents tail)
+       sc_uint<4> id; // Source ID
+       sc_uint<4> dest; // Destination ID
+	   sc_uint<1> pkt_clk; // Bit for changing the new packet condition
+	   sc_uint<1> h_t; // Header or tail flit ("1" represents tail)
        inline bool operator == (const packet& rhs) const
 		{
 		return (rhs.data == data && rhs.id == id && rhs.dest == dest && rhs.pkt_clk == pkt_clk && rhs.h_t == h_t);

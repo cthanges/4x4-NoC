@@ -1,3 +1,4 @@
+// arbiter.h
 #include "systemc.h"
 SC_MODULE(arbiter) {
 

@@ -1,3 +1,4 @@
+// crossbar.h
 #include "packet.h"
 SC_MODULE(crossbar) {
 
@@ -9,8 +10,8 @@ SC_MODULE(crossbar) {
 
     sc_out<packet>  o0;
     sc_out<packet>  o1;
-    sc_out<packet>  o2; //error here
-    sc_out<packet>  o3; // error here
+    sc_out<packet>  o2;
+    sc_out<packet>  o3;
 	sc_out<packet>  o4;
 
 	sc_in<sc_uint<15> >  config;

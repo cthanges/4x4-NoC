@@ -1,5 +1,4 @@
 // buf_fifo.cpp
-
 #include "buf_fifo.h"
 
     void fifo::packet_in(const packet& data_packet)
@@ -27,21 +26,18 @@
 
 void buf_fifo :: func()
 {
-	fifo q0;	// define a FIFO buffer
+	fifo q0; // Define a FIFO buffer
 	q0.reg_num = 0;
 	q0.full  = false;
 	q0.empty = true;
 	packet b_temp;
-	req.write((q0.registers[0].h_t,q0.empty, q0.registers[0].dest));// this outputs header or tail flit while empty and destination ID
-	//cout << "header/tail flit" << q0.registers[0].h_t <<endl;
+	req.write((q0.registers[0].h_t,q0.empty, q0.registers[0].dest)); // This outputs header or tail flit while empty and destination ID
 
-	// functionality
-	while( true )
+	// Functionality
+	while(true)
 	{ 
 		wait();
-		
-		
-		/////received packet/////     
+		// Received packets    
 		if (wr.event()) 
 		{			
 			q0.packet_in(wr.read());
@@ -49,10 +45,10 @@ void buf_fifo :: func()
 			req.write((q0.registers[0].h_t, q0.empty, q0.registers[0].dest));
 			//cout << "header/tail flit" << q0.registers[0].h_t <<endl;
 		}
-	    ///// sent packets out/////    
+	    // Sent packets out    
 		if (bclk.event()) 
 		{
-//			req.write((q0.empty, q0.registers[0].dest));
+			// req.write((q0.empty, q0.registers[0].dest));
 			if(grant.read() == 1)
 			{
 				b_temp = q0.packet_out();

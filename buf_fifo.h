@@ -1,3 +1,4 @@
+// buf_fifo.h
 #include "packet.h"
 SC_MODULE(buf_fifo) {
     sc_in	<packet>		wr;
@@ -25,8 +26,7 @@ public:
    bool empty;
    int reg_num;
   
-   // constructor
-
+   // Constructor
    fifo()
     {
       full = false;
@@ -34,8 +34,7 @@ public:
       reg_num = 0;
     };
 
-	// methods
-
+	// Methods
 	void packet_in(const packet& data_packet);   
 	packet packet_out();
 };

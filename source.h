@@ -4,11 +4,11 @@ SC_MODULE(source) {
 
   sc_out<packet> packet_out; 
   sc_in<sc_uint<4> > source_id; 
-  sc_in<bool > ach_in;			// input acknowledgment
+  sc_in<bool > ach_in; // Input acknowledgment
   sc_in_clk CLK;
   sc_in<int> d_est;
   sc_in<sc_uint<4> > ch_k;
-  int pkt_snt;					// variable for recording of packet sent
+  int pkt_snt; // Variable for recording of packet sent
 
   void func();
   

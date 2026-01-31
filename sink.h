@@ -1,8 +1,8 @@
 // sink.h
 #include "packet.h"
 SC_MODULE(sink) {
-	sc_in<packet> packet_in;	// input port
-	sc_out<bool> ack_out;		// output port
+	sc_in<packet> packet_in; // Input port
+	sc_out<bool> ack_out; // Output port
 	sc_in<sc_uint<4> > sink_id;
 	sc_in<bool> sclk;
 	sc_out<packet> packet_out_sink; 

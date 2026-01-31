@@ -8,7 +8,6 @@
 #include "sink.h"
 #include "router.h"
 
-
 int sc_main(int argc, char *argv[])
 {
 	// Define signals for interfacing modules
@@ -23,7 +22,6 @@ int sc_main(int argc, char *argv[])
 	sc_signal<bool>  si_ack_sink[16],si_ack_in[64];
 	sc_signal<bool>  si_ack_zero[64];
 
-
 	sc_signal<sc_uint<4> >  siid0,siid1,siid2,siid3,siid4,siid5,siid6,siid7,siid8,siid9,siid10,siid11,siid12,siid13,siid14,siid15;
 	sc_signal<sc_uint<4> > scid0,scid1, scid2, scid3,scid4,scid5, scid6, scid7,scid8,scid9, scid10, scid11,scid12,scid13, scid14, scid15;
 	sc_signal<sc_uint<4> > id0,id1, id2, id3, id4,id5, id6, id7,id8,id9, id10, id11,id12,id13, id14, id15;
@@ -31,10 +29,10 @@ int sc_main(int argc, char *argv[])
 	sc_signal<sc_uint<4> > check;
 	sc_signal <packet> sioutput[16];
 	int i,j;
-	sc_clock s_clock("S_CLOCK", 125, SC_NS, 0.5, 0.0, SC_NS); // source clock
-	//sc_clock s_clock("S_CLOCK", 5, SC_NS, 0.5, 10.0, SC_NS); // source clk = router clk
-	sc_clock r_clock("R_CLOCK", 5, SC_NS, 0.5, 10.0, SC_NS);	// router clock
-	sc_clock d_clock("D_CLOCK", 5, SC_NS, 0.5, 10.0, SC_NS);	// destination clock
+	sc_clock s_clock("S_CLOCK", 125, SC_NS, 0.5, 0.0, SC_NS); // Source clock
+	//sc_clock s_clock("S_CLOCK", 5, SC_NS, 0.5, 10.0, SC_NS); // Source clk = Router clk
+	sc_clock r_clock("R_CLOCK", 5, SC_NS, 0.5, 10.0, SC_NS); // Router clock
+	sc_clock d_clock("D_CLOCK", 5, SC_NS, 0.5, 10.0, SC_NS); // Destination clock
 	
 	// Module instiatiations follow
 	// Note that modules can be connected by hooking up ports 
@@ -44,13 +42,11 @@ int sc_main(int argc, char *argv[])
 	source source0("source0");
 	source0(si_source[0], scid0, si_ack_src[0], s_clock, scinput,check);
 	
-	
     source source1("source1");
 	source1(si_source[1], scid1, si_ack_src[1], s_clock, scinput,check);
 
 	source source2("source2");
 	source2(si_source[2], scid2, si_ack_src[2], s_clock, scinput,check);
-	
 	
 	source source3("source3");
 	source3(si_source[3], scid3, si_ack_src[3], s_clock, scinput,check);
@@ -58,13 +54,11 @@ int sc_main(int argc, char *argv[])
 	source source4("source4");
 	source4(si_source[4], scid4, si_ack_src[4], s_clock, scinput,check);
 	
-	
     source source5("source5");
 	source5(si_source[5], scid5, si_ack_src[5], s_clock, scinput,check);
 
 	source source6("source6");
 	source6(si_source[6], scid6, si_ack_src[6], s_clock, scinput,check);
-	
 	
 	source source7("source7");
 	source7(si_source[7], scid7, si_ack_src[7], s_clock, scinput,check);
@@ -72,13 +66,11 @@ int sc_main(int argc, char *argv[])
 	source source8("source8");
 	source8(si_source[8], scid8, si_ack_src[8], s_clock, scinput,check);
 	
-	
     source source9("source9");
 	source9(si_source[9], scid9, si_ack_src[9], s_clock, scinput,check);
 
 	source source10("source10");
 	source10(si_source[10], scid10, si_ack_src[10], s_clock, scinput,check);
-	
 	
 	source source11("source11");
 	source11(si_source[11], scid11, si_ack_src[11], s_clock, scinput,check);
@@ -86,20 +78,17 @@ int sc_main(int argc, char *argv[])
 	source source12("source12");
 	source12(si_source[12], scid12, si_ack_src[12], s_clock, scinput,check);
 	
-	
     source source13("source13");
 	source13(si_source[13], scid13, si_ack_src[13], s_clock, scinput,check);
 
 	source source14("source14");
 	source14(si_source[14], scid14, si_ack_src[14], s_clock, scinput,check);
 	
-	
 	source source15("source15");
 	source15(si_source[15], scid15, si_ack_src[15], s_clock, scinput,check);
 
-
 	router router0("router0");
-	// hooking up signals to ports by name
+	// Hooking up signals to ports by name
 	router0.in0(si_source[0]);
 	router0.in1(si_output[2]);
 	router0.in2(si_output[12]);
@@ -107,7 +96,6 @@ int sc_main(int argc, char *argv[])
 	router0.in4(si_zero[2]);
 
 	router0.router_id(id0);
-	//router0.router_id(0);
 
 	router0.out0(si_sink[0]);
 	router0.out2(si_output[0]);
@@ -130,7 +118,7 @@ int sc_main(int argc, char *argv[])
 	router0.rclk(r_clock);
 
 	router router1("router1");
-	// hooking up signals to ports by name
+	// Hooking up signals to ports by name
 	router1.in0(si_source[1]);
 	router1.in1(si_output[0]);
 	router1.in2(si_output[7]);
@@ -139,7 +127,6 @@ int sc_main(int argc, char *argv[])
 	
 
 	router1.router_id(id1);
-	//router1.router_id(1);
 
 	router1.out0(si_sink[1]);
 	router1.out4(si_output[2]);
@@ -163,7 +150,7 @@ int sc_main(int argc, char *argv[])
 	//need 64 code statement
 
 	router router2("router2");
-	// hooking up signals to ports by name
+	// Hooking up signals to ports by name
 	router2.in0(si_source[2]);
 	router2.in1(si_output[4]);
 	router2.in2(si_output[9]);
@@ -172,7 +159,6 @@ int sc_main(int argc, char *argv[])
 	
 
 	router2.router_id(id2);
-	//router2.router_id(2);
 
 	router2.out0(si_sink[2]);
 	router2.out1(si_zero[19]);
@@ -198,7 +184,7 @@ int sc_main(int argc, char *argv[])
 	router2.rclk(r_clock);
 
 	router router3("router3");
-	// hooking up signals to ports by name
+	// Hooking up signals to ports by name
 	router3.in0(si_source[3]);
 	router3.in1(si_output[5]);
 	router3.in2(si_output[21]);
@@ -206,7 +192,6 @@ int sc_main(int argc, char *argv[])
 	router3.in4(si_zero[9]);
 
 	router3.router_id(id3);
-	//router3.router_id(3);
 
 	router3.out0(si_sink[3]);
 	router3.out3(si_output[8]);
@@ -231,7 +216,7 @@ int sc_main(int argc, char *argv[])
 	router3.rclk(r_clock);
 
 	router router4("router4");
-	// hooking up signals to ports by name
+	// Hooking up signals to ports by name
 	router4.in0(si_source[4]);
 	router4.in1(si_output[1]);
 	router4.in2(si_output[13]);
@@ -239,7 +224,6 @@ int sc_main(int argc, char *argv[])
 	router4.in4(si_zero[10]);
 
 	router4.router_id(id4);
-	//router0.router_id(0);
 
 	router4.out0(si_sink[4]);
 	router4.out2(si_output[10]);
@@ -262,7 +246,7 @@ int sc_main(int argc, char *argv[])
 	router4.rclk(r_clock);
 
 	router router5("router5");
-	// hooking up signals to ports by name
+	// Hooking up signals to ports by name
 	router5.in0(si_source[5]);
 	router5.in1(si_output[3]);
 	router5.in2(si_output[10]);
@@ -271,7 +255,6 @@ int sc_main(int argc, char *argv[])
 	
 
 	router5.router_id(id5);
-	//router1.router_id(1);
 
 	router5.out0(si_sink[5]);
 	router5.out4(si_output[13]);
@@ -295,7 +278,7 @@ int sc_main(int argc, char *argv[])
 	//need 64 code statement
 
 	router router6("router6");
-	// hooking up signals to ports by name
+	// Hooking up signals to ports by name
 	router6.in0(si_source[6]);
 	router6.in1(si_output[6]);
 	router6.in2(si_output[15]);
@@ -304,7 +287,6 @@ int sc_main(int argc, char *argv[])
 	
 
 	router6.router_id(id6);
-	//router2.router_id(2);
 
 	router6.out0(si_sink[6]);
 	router6.out1(si_output[17]);
@@ -330,7 +312,7 @@ int sc_main(int argc, char *argv[])
 	router6.rclk(r_clock);
 
 	router router7("router7");
-	// hooking up signals to ports by name
+	// Hooking up signals to ports by name
 	router7.in0(si_source[7]);
 	router7.in1(si_output[8]);
 	router7.in2(si_output[18]);
@@ -338,7 +320,6 @@ int sc_main(int argc, char *argv[])
 	router7.in4(si_zero[11]);
 
 	router7.router_id(id7);
-	//router3.router_id(3);
 
 	router7.out0(si_sink[7]);
 	router7.out1(si_output[21]);
@@ -365,7 +346,7 @@ int sc_main(int argc, char *argv[])
 //-------------------------------------------------------------------
 
 	router router8("router8");
-	// hooking up signals to ports by name
+	// Hooking up signals to ports by name
 	router8.in0(si_source[8]);
 	router8.in1(si_output[11]);
 	router8.in2(si_output[27]);
@@ -373,7 +354,6 @@ int sc_main(int argc, char *argv[])
 	router8.in4(si_zero[12]);
 
 	router8.router_id(id8);
-	//router0.router_id(0);
 
 	router8.out0(si_sink[8]);
 	router8.out2(si_output[24]);
@@ -396,7 +376,7 @@ int sc_main(int argc, char *argv[])
 	router8.rclk(r_clock);
 
 	router router9("router9");
-	// hooking up signals to ports by name
+	// Hooking up signals to ports by name
 	router9.in0(si_source[9]);
 	router9.in1(si_output[14]);
 	router9.in2(si_output[24]);
@@ -405,7 +385,6 @@ int sc_main(int argc, char *argv[])
 	
 
 	router9.router_id(id9);
-	//router1.router_id(1);
 
 	router9.out0(si_sink[9]);
 	router9.out4(si_output[27]);
@@ -429,7 +408,7 @@ int sc_main(int argc, char *argv[])
 	//need 64 code statement
 
 	router router10("router10");
-	// hooking up signals to ports by name
+	// Hooking up signals to ports by name
 	router10.in0(si_source[10]);
 	router10.in1(si_output[19]);
 	router10.in2(si_output[29]);
@@ -438,7 +417,6 @@ int sc_main(int argc, char *argv[])
 	
 
 	router10.router_id(id10);
-	//router2.router_id(2);
 
 	router10.out0(si_sink[10]);
 	router10.out1(si_output[31]);
@@ -464,7 +442,7 @@ int sc_main(int argc, char *argv[])
 	router10.rclk(r_clock);
 
 	router router11("router11");
-	// hooking up signals to ports by name
+	// Hooking up signals to ports by name
 	router11.in0(si_source[11]);
 	router11.in1(si_output[23]);
 	router11.in2(si_output[32]);
@@ -472,7 +450,6 @@ int sc_main(int argc, char *argv[])
 	router11.in4(si_zero[13]);
 
 	router11.router_id(id11);
-	//router3.router_id(3);
 
 	router11.out0(si_sink[11]);
 	router11.out1(si_output[35]);
@@ -499,7 +476,7 @@ int sc_main(int argc, char *argv[])
 //-------------------------------------------------
 
 	router router12("router12");
-	// hooking up signals to ports by name
+	// Hooking up signals to ports by name
 	router12.in0(si_source[12]);
 	router12.in1(si_output[25]);
 	router12.in2(si_output[40]);
@@ -507,7 +484,6 @@ int sc_main(int argc, char *argv[])
 	router12.in4(si_zero[15]);
 
 	router12.router_id(id12);
-	//router0.router_id(0);
 
 	router12.out0(si_sink[12]);
 	router12.out1(si_output[38]);
@@ -530,7 +506,7 @@ int sc_main(int argc, char *argv[])
 	router12.rclk(r_clock);
 
 	router router13("router13");
-	// hooking up signals to ports by name
+	// Hooking up signals to ports by name
 	router13.in0(si_source[13]);
 	router13.in1(si_output[28]);
 	router13.in2(si_output[39]);
@@ -539,7 +515,6 @@ int sc_main(int argc, char *argv[])
 	
 
 	router13.router_id(id13);
-	//router1.router_id(1);
 
 	router13.out0(si_sink[13]);
 	router13.out4(si_output[40]);
@@ -563,7 +538,7 @@ int sc_main(int argc, char *argv[])
 	//need 64 code statement
 
 	router router14("router14");
-	// hooking up signals to ports by name
+	// Hooking up signals to ports by name
 	router14.in0(si_source[14]);
 	router14.in1(si_output[33]);
 	router14.in2(si_output[42]);
@@ -572,7 +547,6 @@ int sc_main(int argc, char *argv[])
 	
 
 	router14.router_id(id14);
-	//router2.router_id(2);
 
 	router14.out0(si_sink[14]);
 	router14.out1(si_output[43]);
@@ -598,7 +572,7 @@ int sc_main(int argc, char *argv[])
 	router14.rclk(r_clock);
 
 	router router15("router15");
-	// hooking up signals to ports by name
+	// Hooking up signals to ports by name
 	router15.in0(si_source[15]);
 	router15.in1(si_output[37]);
 	router15.in2(si_output[44]);
@@ -606,7 +580,6 @@ int sc_main(int argc, char *argv[])
 	router15.in4(si_zero[19]);
 
 	router15.router_id(id15);
-	//router3.router_id(3);
 
 	router15.out0(si_sink[15]);
 	router15.out1(si_output[46]);
@@ -698,8 +671,9 @@ int sc_main(int argc, char *argv[])
 
 //sc_start(0, SC_NS);
   // tracing:
-	// trace file creation
+	// Trace file creation
 	sc_trace_file *tf = sc_create_vcd_trace_file("graph");
+
 	// External Signals
 	sc_trace(tf, s_clock, "s_clock");
 	sc_trace(tf, d_clock, "d_clock");
@@ -806,7 +780,7 @@ int sc_main(int argc, char *argv[])
 	cout << "  Press \"Enter\" or \"Return\" to begin simulation..." << endl << endl;
 
 	getchar();
-	sc_start(10*125+124,SC_NS); // during [(10*125)+124] ns 10 packets will be sent and received 
+	sc_start(10*125+124,SC_NS); // During [(10*125)+124] ns 10 packets will be sent and received 
 
 	sc_close_vcd_trace_file(tf);
 
@@ -851,5 +825,3 @@ int sc_main(int argc, char *argv[])
   return 0;
 
 }
-
-
